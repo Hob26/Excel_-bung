@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Excel-Werkstatt</title>
+<style>
+:root{--bg:#eaf1ec;--cd:#fff;--tx:#14241b;--mu:#587064;--bd:#cdd9d2;--g:#1d7044;--gd:#124a2c;--hd:#e7efe9;--wb:#fff0b8;--wt:#5e4200;--ok:#d3f0dc;--ot:#0f5a2c;--cell:#fff;--tgc:#fff1b0;--sl:#d2e9da;--pvc:#e3f2e8;--r0:#2563eb;--r1:#d9480f;--r2:#7c3aed;--r3:#0a9150;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1613;--cd:#1a2420;--tx:#e6efe9;--mu:#9bb0a5;--bd:#33443b;--g:#2e9d5f;--gd:#0f3b24;--hd:#24312a;--wb:#3b3114;--wt:#f1cf7a;--ok:#1d4a30;--ot:#a9e8c3;--cell:#16201b;--tgc:#4a3f12;--sl:#24503a;--pvc:#2c5a46;--r0:#6ea0ff;--r1:#ff8a4c;--r2:#b794ff;--r3:#45d68a}}
+:root[data-theme="dark"]{--bg:#0f1613;--cd:#1a2420;--tx:#e6efe9;--mu:#9bb0a5;--bd:#33443b;--g:#2e9d5f;--gd:#0f3b24;--hd:#24312a;--wb:#3b3114;--wt:#f1cf7a;--ok:#1d4a30;--ot:#a9e8c3;--cell:#16201b;--tgc:#4a3f12;--sl:#24503a;--pvc:#2c5a46;--r0:#6ea0ff;--r1:#ff8a4c;--r2:#b794ff;--r3:#45d68a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 "Avenir Next","Nunito","Segoe UI",system-ui,sans-serif}
+.hero{background:linear-gradient(115deg,var(--gd),var(--g));color:#fff;padding:18px 16px 16px;border-radius:0 0 24px 24px}
+.hero>div{max-width:1100px;margin:0 auto}h1{margin:0;font-size:28px;letter-spacing:-.5px}.hero p{margin:2px 0 12px;opacity:.9}
+.pg{height:12px;background:rgba(255,255,255,.25);border-radius:8px;overflow:hidden}.pg i{display:block;height:100%;width:0;background:#ffd84d;border-radius:8px;transition:width .5s}.hero small{opacity:.9}
+main{max-width:1100px;margin:0 auto;padding:14px}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:10px;padding:8px 12px;min-height:42px}
+#mods{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px}
+#mods button{flex:0 0 auto;border-radius:14px;padding:8px 14px;text-align:left;line-height:1.25}#mods small{display:block;color:var(--mu)}
+#mods button.cur{background:var(--g);color:#fff;border-color:var(--g)}#mods button.cur small{color:#d7f0e0}
+.lay{display:grid;grid-template-columns:minmax(270px,360px) 1fr;gap:14px;align-items:start}
+@media(max-width:880px){.lay{grid-template-columns:1fr}}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:16px}
+#cnt{color:var(--mu);font-size:14px}h2{font-size:22px;margin:2px 0 10px;line-height:1.25}h3{margin:0 0 4px;font-size:15px}
+#dots{display:flex;gap:6px;margin:6px 0}#dots button{width:36px;min-height:36px;padding:0;border-radius:50%}#dots .cur{border:2px solid var(--g);font-weight:700}#dots .dn{background:var(--ok);color:var(--ot)}
+.bx{border-radius:12px;padding:10px 14px;margin:10px 0;border-left:5px solid var(--g)}.how{background:var(--hd)}.why{background:var(--ok);color:var(--ot);border-color:var(--ot)}.task{background:var(--wb);color:var(--wt);border-color:#e0a400;font-weight:600}
+code{background:var(--cell);border:1px solid var(--bd);padding:0 6px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--tx);font-weight:400}
+.xl{border:1px solid var(--bd);border-radius:14px;background:var(--cell)}
+.bar{background:var(--g);color:#fff;padding:7px 14px;font-size:14px;border-radius:13px 13px 0 0}
+.rb{display:flex;gap:6px;align-items:center;padding:6px;background:var(--hd);border-bottom:1px solid var(--bd)}.rb b{color:var(--g);padding:0 8px}.rb button{min-height:38px;padding:4px 12px}
+.fxb{display:flex;gap:6px;align-items:center;padding:6px;background:var(--hd);border-bottom:1px solid var(--bd)}.fxb i{color:var(--g);font-weight:700}
+#nb{min-width:64px;text-align:center;background:var(--cell);border:1px solid var(--bd);border-radius:6px;padding:7px 4px;font-size:14px}.fxb button{padding:2px 10px;min-height:38px}
+.fw{position:relative;flex:1;min-width:0}#fx{width:100%;box-sizing:border-box;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--cell);color:var(--tx);font-family:ui-monospace,Menlo,monospace}
+#ac{display:none;position:absolute;left:0;top:100%;z-index:30;min-width:260px;background:var(--cd);border:1px solid var(--bd);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.25);margin-top:3px;overflow:hidden}
+.ai{padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--bd)}.ai span{color:var(--mu);font-size:13px;margin-left:6px}.ai.on{background:var(--sl)}
+#tip{display:none;padding:6px 12px;font-size:14px;background:var(--wb);color:var(--wt);font-family:ui-monospace,Menlo,monospace}#tip u{font-weight:700}
+#kb{display:flex;gap:4px;flex-wrap:wrap;padding:5px 6px;background:var(--hd);border-bottom:1px solid var(--bd)}#kb button{min-width:38px;min-height:38px;padding:0;font-family:ui-monospace,Menlo,monospace;font-size:17px}
+#wp{position:relative;overflow:auto;max-height:470px}
+table{border-collapse:collapse;table-layout:fixed;user-select:none;-webkit-user-select:none;touch-action:none}
+th{background:var(--hd);color:var(--mu);font-size:13px;border:1px solid var(--bd);height:30px}th.on{background:var(--sl);color:var(--g);font-weight:700}
+td{border:1px solid var(--bd);height:34px;padding:0 6px;background:var(--cell);font-size:15px;white-space:nowrap;overflow:hidden}
+td.n{text-align:right}td.er{color:#c0392b}td.tg{background:var(--tgc)}td.sl{background:var(--sl)}td.pv{background:var(--pvc)}
+td.r0{box-shadow:inset 0 0 0 2px var(--r0)}td.r1{box-shadow:inset 0 0 0 2px var(--r1)}td.r2{box-shadow:inset 0 0 0 2px var(--r2)}td.r3{box-shadow:inset 0 0 0 2px var(--r3)}
+td.ac{outline:2px solid var(--g);outline-offset:-2px}
+#hd{position:absolute;width:30px;height:30px;touch-action:none;z-index:5;display:none;cursor:crosshair}#hd::after{content:"";position:absolute;left:10px;top:10px;width:9px;height:9px;background:var(--g);border:1px solid var(--cd)}
+.sh{padding:5px 14px;font-size:13px;color:var(--g);border-top:1px solid var(--bd);background:var(--hd);font-weight:600;border-radius:0 0 13px 13px}
+.fb{margin-top:12px;padding:14px;border-radius:12px;background:var(--cd);border:1px solid var(--bd)}.fb.wn{background:var(--wb);color:var(--wt)}.fb.ok{background:var(--ok);color:var(--ot);font-weight:700}
+.fb button{margin-left:8px;background:var(--g);color:#fff;border-color:var(--g)}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+</style></head><body>
+<header class="hero"><div><h1>📗 Excel-Werkstatt</h1><p>Lerne Excel Schritt für Schritt und probiere alles gleich selbst aus.</p><div class="pg"><i id="pgi"></i></div><small id="pgt"></small></div></header>
+<main><nav id="mods"></nav><div class="lay">
+<aside class="card"><div id="cnt"></div><div id="dots"></div><h2 id="t"></h2>
+<div class="bx how"><h3>📘 So geht’s</h3><div id="e"></div></div>
+<div class="bx why"><h3>🌍 Wozu brauchst du das?</h3><div id="y"></div></div>
+<div class="bx task"><h3>🎯 Deine Aufgabe</h3><div id="k"></div></div></aside>
+<section><div class="xl"><div class="bar">📗 Mappe1 – Excel</div>
+<div class="rb"><b>Start</b><button id="bs" title="Summe der Zahlen über der Zelle">Σ AutoSumme</button><button id="be" title="Markierte Zellen als Euro">€ Währung</button></div>
+<div class="fxb"><span id="nb"></span><button id="bc" title="Abbrechen">✕</button><button id="bv" title="Übernehmen">✓</button><i>ƒx</i><div class="fw"><input id="fx" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off" placeholder="Zelle antippen und hier eintippen"><div id="ac"></div></div></div>
+<div id="tip"></div><div id="kb"></div><div id="wp"></div><div class="sh">Tabelle1</div></div>
+<div class="fb" id="fb"></div>
+<div class="ctl"><button onclick="hint()">💡 Tipp</button><button onclick="load()">↺ Neu starten</button><button onclick="go(-1)">← Zurück</button></div></section>
+</div></main>
+<script>
+const $=s=>document.querySelector(s),L=i=>String.fromCharCode(65+i);
+const MO=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],WD=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+const MODS=['🧱 Grundlagen','📅 Autoausfüllen','🔢 Anzahl','🚦 WENN','⭐ Mehr Funktionen'];
+const P=k=>{const m=/^\$?([A-Z]+)\$?(\d+)$/.exec(k);return[m[1].charCodeAt(0)-65,+m[2]]},ref=(c,r)=>L(c)+r;
+let fmt={},cells={},sel,si=0,drag=0,fillTo=0,dirty=false,dp=0;const done=new Set();
+const Q=k=>cells[k]||'',V=k=>{try{return val(k)}catch(e){return'#'}},eq=(k,x)=>Math.abs(V(k)-x)<.01;
+const F={SUMME:(...a)=>a.flat().filter(x=>typeof x=='number').reduce((s,x)=>s+x,0),ANZAHL:(...a)=>a.flat().filter(x=>typeof x=='number').length,ANZAHL2:(...a)=>a.flat().filter(x=>x!=='').length,ANZAHLLEEREZELLEN:(...a)=>a.flat().filter(x=>x==='').length,WENN:(c,a,b)=>c?a:b,MITTELWERT:(...a)=>{const n=a.flat().filter(x=>typeof x=='number');return n.reduce((s,x)=>s+x,0)/n.length},MIN:(...a)=>Math.min(...a.flat().filter(x=>typeof x=='number')),MAX:(...a)=>Math.max(...a.flat().filter(x=>typeof x=='number'))};
+const C=k=>{const v=val(k);return v===''?0:v},R=(a,b)=>{const[p,q]=[P(a),P(b)],o=[];for(let r=p[1];r<=q[1];r++)for(let c=p[0];c<=q[0];c++)o.push(val(ref(c,r)));return o};
+function ev(f){const T=[];f.replace(/\s+|("[^"]*")|(\$?[A-Z]+\$?\d+:\$?[A-Z]+\$?\d+)|([A-ZÄÖÜ][A-ZÄÖÜ0-9]*)\(|(\$?[A-Z]+\$?\d+)|(<>|>=|<=|[=<>;()+\-*\/])|(\d+(?:[.,]\d+)?)|(.)/gi,(m,s,rg,fn,c,op,n,x)=>{if(x)throw 0;if(s)T.push(['s',s.slice(1,-1)]);else if(rg){const[a,b]=rg.replace(/\$/g,'').toUpperCase().split(':');T.push(['r',R(a,b)])}else if(fn)T.push(['f',fn.toUpperCase()]);else if(c)T.push(['c',C(c.replace(/\$/g,'').toUpperCase())]);else if(op)T.push(['o',op]);else if(n)T.push(['n',+n.replace(',','.')]);return''});
+let i=0;const pk=()=>T[i],is=o=>pk()&&pk()[0]=='o'&&pk()[1]==o,num=x=>{const v=Number(x);if(isNaN(v))throw 0;return v};
+const cmp=()=>{let a=add();while(pk()&&pk()[0]=='o'&&/^(=|<>|<|>|<=|>=)$/.test(pk()[1])){const o=T[i++][1],b=add();a=o=='='?a==b:o=='<>'?a!=b:o=='<'?a<b:o=='>'?a>b:o=='<='?a<=b:a>=b}return a};
+const add=()=>{let a=mul();while(is('+')||is('-')){const o=T[i++][1],b=mul();a=o=='+'?num(a)+num(b):num(a)-num(b)}return a};
+const mul=()=>{let a=un();while(is('*')||is('/')){const o=T[i++][1],b=un();a=o=='*'?num(a)*num(b):num(a)/num(b)}return a};
+const un=()=>{const t=T[i++];if(!t)throw 0;if(t[0]=='o'){if(t[1]=='-')return-num(un());if(t[1]=='('){const v=cmp();if(!is(')'))throw 0;i++;return v}throw 0}
+if(t[0]=='f'){const a=[];if(!is(')')){a.push(cmp());while(is(';')){i++;a.push(cmp())}}if(!is(')'))throw 0;i++;const fn=F[t[1]];if(!fn)throw 0;return fn(...a)}return t[1]};
+const r=cmp();if(i<T.length)throw 0;if(typeof r=='number'&&!isFinite(r))throw 0;return r}
+function val(k){k=k.replace(/\$/g,'');let r=cells[k];if(r===undefined||r==='')return'';r=''+r;if(r[0]=='='){if(++dp>40){dp=0;throw 0}try{return ev(r.slice(1))}finally{dp--}}const n=r.replace(',','.');return n.trim()!==''&&!isNaN(n)?+n:r}
+function disp(v){if(typeof v=='number')return(Math.round(v*100)/100).toLocaleString('de-DE',{maximumFractionDigits:2});if(typeof v=='boolean')return v?'WAHR':'FALSCH';return v===undefined?'':''+v}
+const shift=(s,d)=>s.replace(/(\$?)([A-Z]{1,2})(\$?)(\d+)(?!\()/g,(m,a,c,b,n)=>b?m:a+c+(+n+d));
+function nxt(s,j){const l=s.toLowerCase();let i,m;if((i=WD.findIndex(x=>x.toLowerCase()==l))>=0)return WD[(i+j)%7];if((i=MO.findIndex(x=>x.toLowerCase()==l))>=0)return MO[(i+j)%12];
+if(m=s.match(/^(\d\d?)\.(\d\d?)\.(\d{4})$/)){const d=new Date(Date.UTC(+m[3],m[2]-1,+m[1]+j)),p=x=>String(x).padStart(2,'0');return`${p(d.getUTCDate())}.${p(d.getUTCMonth()+1)}.${d.getUTCFullYear()}`}
+if(m=s.match(/^(\d+)(\D.*)$/))return(+m[1]+j)+m[2];if(m=s.match(/^(.*\D)(\d+)$/))return m[1]+(+m[2]+j);return s}
+const rect=()=>[Math.min(sel.a[0],sel.b[0]),Math.max(sel.a[0],sel.b[0]),Math.min(sel.a[1],sel.b[1]),Math.max(sel.a[1],sel.b[1])];
+function fill(to){const[c1,c2,r1,r2]=rect();if(to<=r2)return;for(let c=c1;c<=c2;c++){const src=[];for(let r=r1;r<=r2;r++)src.push(''+(cells[ref(c,r)]||''));const n=src.length;
+for(let r=r2+1;r<=to;r++){const i=(r-r1)%n,j=r-r2,s=src[i];let v;
+if(src.every(x=>x[0]=='='))v=shift(s,r-(r1+i));
+else if(n>1&&src.every(x=>x!==''&&!isNaN(x.replace(',','.')))){const N=src.map(x=>+x.replace(',','.'));v=N[n-1]+(N[n-1]-N[0])/(n-1)*j}
+else v=n==1?nxt(s,j):s;cells[ref(c,r)]=''+v}}
+sel.b=[sel.b[0],to];if(sel.a[1]>sel.b[1])sel.a=[sel.a[0],to]}
+/* Aufgaben */
+const MOc={A1:'Monat',B1:'Taschengeld',A14:'Gesamt'};MO.forEach((m,i)=>{MOc['A'+(i+2)]=m;MOc['B'+(i+2)]=i==6?50:25});
+const AZ={A1:'Name',B1:'Laptop',A13:'Mit Laptop',A14:'Personen in der Liste',A15:'Noch ohne Laptop'};['Stefan','August','Adam','Alba','Jeremie','Lena','Mia','Ben','Yusuf','Emma'].forEach((n,i)=>{AZ['A'+(i+2)]=n;if([1,0,1,0,1,0,1,0,1,1][i])AZ['B'+(i+2)]=1});
+const KL={A1:'Posten',B1:'€ pro Person',A2:'Bus',B2:25,A3:'Unterkunft',B3:60,A4:'Essen',A5:'Museum',B5:12,A6:'Gesamt'};
+const cnt=(re,x,fb,rng)=>()=>{const r=Q(fb);if(!r)return'';if(!re.test(r))return'Nutze die passende Funktion – sie steht in der Erklärung oben.';return eq(fb,x)||'Fast. Prüfe den Bereich: '+rng}
+const S=[
+{m:0,t:'Zellen und Eingabe',e:`Eine Excel-Tabelle besteht aus vielen <b>Zellen</b>. Jede hat eine Adresse aus <b>Spalte (Buchstabe)</b> und <b>Zeile (Zahl)</b>: Spalte B, Zeile 4 heißt <b>B4</b>. So gibst du etwas ein: Zelle antippen → oben in die <b>Eingabezeile</b> tippen → <b>Enter</b> (oder ✓).`,
+y:`Du organisierst die Klassenfahrt und willst wissen, was jeder bezahlen muss. Auf einem Zettel verlierst du schnell den Überblick – in Excel steht alles sortiert und jede Zahl lässt sich später ändern.`,
+k:`Auf dem Zettel steht: Das Essen kostet 30 € pro Person. Tippe <b>30</b> in Zelle <b>B4</b>.`,h:'Tippe auf B4, dann oben in die Eingabezeile die Zahl 30 und Enter.',c:KL,nc:3,nr:6,tg:['B4'],ck:()=>V('B4')===30||(Q('B4')?'Das ist nicht der Betrag vom Zettel (30).':'')},
+{m:0,t:'Rechnen mit =',e:`Excel ist ein Rechner mit Gedächtnis. Eine Rechnung beginnt <b>immer mit =</b>. Danach tippst du die Zellen und das Rechenzeichen: <b>+</b> addieren, <b>-</b> subtrahieren, <b>*</b> multiplizieren, <b>/</b> dividieren. Beispiel: <code>=B2+B3</code>.`,
+y:`Wird der Bus teurer, rechnet Excel das Ergebnis sofort neu – du musst nichts nachrechnen. Ändere nach der Aufgabe mal den Buspreis!`,
+k:`Berechne in <b>B6</b>, was die Fahrt pro Person insgesamt kostet: B2 bis B5 mit + zusammenzählen.`,h:'=B2+B3+B4+B5',c:{...KL,B4:30},nc:3,nr:6,tg:['B6'],
+ck:()=>{const r=Q('B6');if(!r)return'';if(r[0]!='=')return'Du hast nur eine Zahl getippt. Eine Rechnung muss mit = beginnen.';return eq('B6',127)||'Das Ergebnis stimmt noch nicht. Sind B2, B3, B4 und B5 dabei?'}},
+{m:0,t:'SUMME und Zellbereich',e:`Bei vielen Zahlen wäre „B2+B3+B4+…“ viel Tipparbeit. Dafür gibt es <code>=SUMME(B2:B13)</code>. Der <b>Doppelpunkt heißt „bis“</b>: Excel addiert alle Zellen von B2 bis B13. Das nennt man <b>Zellbereich</b>. Noch schneller geht es mit dem Knopf <b>Σ AutoSumme</b> im Menüband: Zelle unter den Zahlen antippen, Σ drücken.`,
+y:`Ein Kassenbuch oder eine Notenliste hat schnell 200 Zeilen. Mit SUMME legst du nur „von … bis …“ fest und bist fertig.`,
+k:`Wie viel Taschengeld bekommst du im ganzen Jahr? Berechne in <b>B14</b> die Summe von B2 bis B13 mit der SUMME-Funktion.`,h:'=SUMME(B2:B13)',c:MOc,nc:3,nr:14,tg:['B14'],
+ck:()=>{const r=Q('B14');if(!r)return'';if(!/^=SUMME\(/.test(r))return eq('B14',325)?'Das Ergebnis stimmt, aber es geht kürzer: =SUMME(B2:B13)':'Nutze die Funktion SUMME.';return eq('B14',325)||'Fast. Der Bereich muss von B2 bis B13 gehen.'}},
+{m:0,t:'Subtrahieren, Dividieren, Multiplizieren',e:`Die anderen Grundrechenarten gehen genauso: <code>-</code> Differenz, <code>*</code> Produkt (Malzeichen!), <code>/</code> Quotient. Excel rechnet „Punkt vor Strich“. Mit Klammern bestimmst du die Reihenfolge: <code>=(B1+B2)*B3</code>.`,
+y:`Ihr wollt im Urlaub ein Boot mieten. Wenn Excel ausrechnet, wie viel jede Person zahlt, gibt es hinterher keinen Streit ums Geld – und bei einer anderen Personenzahl passt sich alles automatisch an.`,
+k:`Das Boot kostet 275 € pro Tag. Berechne in <b>B3</b> den Preis pro Person für einen Tag (teilen) und in <b>B5</b> den Preis pro Person für alle 8 Tage (malnehmen).`,h:'B3: =B1/B2 – B5: =B3*B4',c:{A1:'Bootmiete pro Tag',B1:275,A2:'Personen',B2:6,A3:'Preis pro Person',A4:'Tage',B4:8,A5:'Preis gesamt pro Person'},nc:3,nr:5,tg:['B3','B5'],
+ck:()=>{const a=Q('B3'),b=Q('B5');if(!a&&!b)return'';if(a[0]!='=')return'B3: Tippe =B1/B2 (Preis geteilt durch Personen).';if(!eq('B3',275/6))return'B3 stimmt noch nicht: Preis pro Tag durch Personen.';if((b||'')[0]!='=')return'B3 stimmt (45,83 €)! Jetzt B5: Preis pro Person mal Tage.';return eq('B5',275/6*8)||'B5 stimmt noch nicht: B3 mal B4.'}},
+{m:0,t:'Zahlen als Euro-Beträge',e:`Markiere Zellen (antippen und ziehen) und tippe oben im Menüband auf <b>€ Währung</b> – Excel schreibt dann „18,00 €“. Das ist nur die <b>Darstellung</b>, die Zahl bleibt eine Zahl.`,
+y:`Geld sollte immer wie Geld aussehen: Preislisten, Kassenzettel, Urlaubsbudget. Mit dem €-Zeichen erkennt jeder sofort, worum es geht.`,
+k:`Berechne in <b>B6</b>, wie viel Urlaubsgeld übrig bleibt (B1 minus die Ausgaben B2 bis B5). Markiere dann <b>B1 bis B6</b> und tippe auf <b>€ Währung</b>.`,h:'B6: =B1-SUMME(B2:B5). Dann B1 antippen, bis B6 ziehen, € Währung antippen.',c:{A1:'Urlaubsgeld',B1:500,A2:'Hotel',B2:252,A3:'Verpflegung',B3:100,A4:'Fahrtkosten',B4:90,A5:'Sonstiges',B5:40,A6:'Übrig'},nc:3,nr:6,tg:['B6'],
+ck:()=>{if(!Q('B6'))return'';if(Q('B6')[0]!='=')return'Rechne mit =, z. B. =B1-SUMME(B2:B5).';if(!eq('B6',18))return'B6 stimmt noch nicht: 500 minus alle Ausgaben.';return['B1','B2','B3','B4','B5','B6'].every(k=>fmt[k])||'Rechnung ✓ – jetzt B1 bis B6 markieren und auf € Währung tippen.'}},
+{m:1,t:'Wochentage und Monate',e:`Unten rechts an der markierten Zelle sitzt ein kleines <b>grünes Quadrat</b> (in Excel am PC ein schwarzes +). Zieh es mit dem Finger nach unten – Excel führt Wochentage und Monate selbst weiter.`,
+y:`Stundenplan, Kalender, Ferienplaner: Wochentage und Monate tippst du nie von Hand. Ein Zug statt zwölfmal tippen.`,
+k:`Tippe <b>A2</b> an und ziehe das grüne Quadrat bis <b>Freitag</b> (A6). Danach <b>B2</b> bis <b>Dezember</b> (B13).`,h:'Zelle antippen, das Quadrat unten rechts anfassen und nach unten ziehen.',c:{A1:'Tag',B1:'Monat',A2:'Montag',B2:'Januar'},nc:3,nr:14,s:'A2',tg:['A6','B13'],
+ck:()=>{const a=WD.slice(0,5).every((d,i)=>V('A'+(i+2))===d),b=MO.every((m,i)=>V('B'+(i+2))===m);return a&&b||(a?'Wochentage ✓ – jetzt B2 bis Dezember ziehen.':b?'Monate ✓ – jetzt A2 bis Freitag ziehen.':'Zelle antippen, dann das grüne Quadrat nach unten ziehen.')}},
+{m:1,t:'Datum',e:`Auch <b>Datumsangaben</b> zählt Excel selbst weiter – Tag für Tag. Schreibe das Datum so: <code>02.11.2026</code>.`,
+y:`Trainingsplan, Hausaufgabenheft, Dienstplan: Du brauchst eine Liste mit lauter aufeinanderfolgenden Tagen – ein Zug und sie steht.`,
+k:`Du planst eine Trainingswoche. Ziehe das Datum in <b>A2</b> nach unten bis <b>A8</b> (7 Tage).`,h:'A2 antippen, grünes Quadrat bis A8 ziehen.',c:{A1:'Datum',A2:'02.11.2026'},nc:2,nr:9,s:'A2',tg:['A8'],
+ck:()=>V('A8')==='08.11.2026'||(Q('A3')?'Ziehe weiter, bis in A8 der 08.11.2026 steht.':'')},
+{m:1,t:'Aufzählungen',e:`Excel führt auch Aufzählungen weiter, wenn du auf die <b>Schreibweise</b> achtest: <b>Zahl</b>, dann <b>Punkt</b>, dann <b>Leerzeichen</b>, dann <b>Wort</b> – wie bei <code>1. Platz</code>.`,
+y:`Rangliste beim Sportfest, Tischnummern bei der Feier, Gruppe 1 bis 8: Excel nummeriert alles automatisch.`,
+k:`Erstelle die Rangliste: Ziehe <b>A2</b> nach unten bis zum <b>5. Platz</b> (A6).`,h:'A2 antippen, Quadrat bis A6 ziehen.',c:{A1:'Rangliste',A2:'1. Platz'},nc:2,nr:7,s:'A2',tg:['A6'],
+ck:()=>V('A6')==='5. Platz'||(Q('A3')?'Ziehe weiter, bis in A6 „5. Platz“ steht.':'')},
+{m:1,t:'Zahlenfolge und Wortfolge',e:`Soll Excel einen <b>Schritt</b> erkennen (hier: immer −3), braucht es <b>zwei Beispiele</b>: Beide Zellen gemeinsam markieren (antippen und über beide ziehen), dann das Quadrat ziehen. So lernt Excel auch eine <b>Wortfolge</b>, die sich wiederholt.`,
+y:`Preisliste in 5-Cent-Schritten, Seitenzahlen, Schichtplan Früh–Spät–Nacht: Ein Muster, das sich wiederholt, musst du Excel nur einmal vormachen.`,
+k:`Markiere <b>A2 und A3</b> gemeinsam und ziehe bis <b>A7</b>. Markiere dann <b>C2 bis C4</b> und ziehe bis <b>C9</b>.`,h:'Erst beide Zellen markieren (über beide wischen), dann das Quadrat am Ende der Markierung ziehen.',c:{A1:'Punkte',A2:30,A3:27,C1:'Farbe',C2:'schwarz',C3:'rot',C4:'gold'},nc:3,nr:10,s:'A2',tg:['A7','C9'],
+ck:()=>{const a=[30,27,24,21,18,15].every((v,i)=>V('A'+(i+2))===v),b='schwarz rot gold schwarz rot gold schwarz rot'.split(' ').every((v,i)=>V('C'+(i+2))===v);return a&&b||(a?'Zahlenfolge ✓ – jetzt C2 bis C4 markieren und ziehen.':b?'Wortfolge ✓ – jetzt A2 und A3 markieren.':'Markiere zuerst beide Zellen gemeinsam, damit Excel das Muster erkennt.')}},
+{m:2,t:'ANZAHL',e:`<code>=ANZAHL(B2:B11)</code> zählt, in <b>wie vielen Zellen eine Zahl</b> steht. Die Zahlen werden <b>nicht zusammengerechnet</b> – es werden nur Zellen gezählt. Text zählt hier nicht mit.`,
+y:`Eine Liste hat 500 Namen. Wer hat schon bezahlt, wer hat einen Laptop (1 = ja)? Mit dem Finger zählen dauert ewig und man verzählt sich.`,
+k:`Wie viele Schüler besitzen einen Laptop (1 = ja)? Zähle in <b>B13</b> mit ANZAHL von B2 bis B11.`,h:'=ANZAHL(B2:B11)',c:AZ,nc:3,nr:15,tg:['B13'],ck:cnt(/^=ANZAHL\(/,6,'B13','B2 bis B11')},
+{m:2,t:'ANZAHL2',e:`<code>=ANZAHL2(A2:A11)</code> zählt alle Zellen, in denen <b>irgendetwas</b> steht – <b>egal ob Text oder Zahl</b>. Probiere ruhig ANZAHL bei den Namen: Das Ergebnis ist 0, denn Namen sind keine Zahlen!`,
+y:`Du hast nur eine Liste von Namen (Schüler, Bücher in der Bücherei, Material im Lager) und willst wissen, wie viele es sind. Es steht keine Zahl dabei – also ANZAHL2.`,
+k:`Wie viele Personen stehen in der Liste? Zähle in <b>B14</b> mit ANZAHL2 die Namen von A2 bis A11.`,h:'=ANZAHL2(A2:A11)',c:{...AZ,B13:'=ANZAHL(B2:B11)'},nc:3,nr:15,tg:['B14'],
+ck:()=>/^=ANZAHL\(/.test(Q('B14'))?'ANZAHL zählt nur Zahlen. Namen sind Text – nimm ANZAHL2.':cnt(/^=ANZAHL2\(/,10,'B14','A2 bis A11')()},
+{m:2,t:'ANZAHLLEEREZELLEN',e:`<code>=ANZAHLLEEREZELLEN(B2:B11)</code> zählt die <b>leeren Zellen</b> im Bereich – alles, was noch nicht ausgefüllt ist.`,
+y:`Wer hat noch nicht bezahlt? Wer hat die Einverständniserklärung nicht abgegeben? Leere Felder verraten dir, wem du noch hinterherlaufen musst.`,
+k:`Wie viele Personen haben noch <b>keinen</b> Laptop? Zähle in <b>B15</b> die leeren Zellen von B2 bis B11.`,h:'=ANZAHLLEEREZELLEN(B2:B11)',c:{...AZ,B13:'=ANZAHL(B2:B11)',B14:'=ANZAHL2(A2:A11)'},nc:3,nr:15,tg:['B15'],ck:cnt(/^=ANZAHLLEEREZELLEN\(/,4,'B15','B2 bis B11')},
+{m:3,t:'WENN – Wörter',e:`<b>WENN … DANN … SONST</b> kennst du aus dem Alltag: <i>Wenn die Ampel grün ist, gehe ich über die Straße, sonst bleibe ich stehen.</i> In Excel: <code>=WENN(Bedingung;Dann-Wert;Sonst-Wert)</code>. Die Teile trennst du mit <b>Strichpunkt</b>. <b>Wörter</b> stehen immer in <b>Anführungszeichen</b>, sonst versteht Excel sie nicht.`,
+y:`Excel kann Entscheidungen treffen: Es schreibt selbst „bezahlt“ oder „offen“ – für alle 300 Zeilen, ohne dass du jede einzeln prüfst.`,
+k:`Tippe in <b>B3</b>: <code>=WENN(A3="rot";"stehen";"gehen")</code>. Ziehe die Formel dann mit dem grünen Quadrat auf <b>B4</b>.`,h:'Anführungszeichen nicht vergessen. Danach B3 antippen und das Quadrat nach unten ziehen.',c:{A1:'AN DER AMPEL',A2:'Ampel',B2:'Handlung',A3:'rot',A4:'grün'},nc:3,nr:5,s:'B3',tg:['B3','B4'],
+ck:()=>{if(!Q('B3'))return'';if(V('B3')!=='stehen')return'In B3 muss „stehen“ erscheinen, weil A3 „rot“ ist. Prüfe Anführungszeichen und Strichpunkte.';return V('B4')==='gehen'||'B3 stimmt! Ziehe sie jetzt nach unten auf B4.'}},
+{m:3,t:'WENN – Zahlen vergleichen',e:`Für Zahlen brauchst du <b>Vergleichsoperatoren</b>: <code>=</code> gleich, <code>&gt;</code> größer als, <code>&lt;</code> kleiner als, <code>&gt;=</code> größer oder gleich, <code>&lt;=</code> kleiner oder gleich, <code>&lt;&gt;</code> ungleich. Beispiel: <code>=WENN(B2&gt;=4;"ausfragen";"nicht ausfragen")</code>`,
+y:`Eine Lehrkraft prüft für 150 Schüler, wer eine weitere mündliche Note braucht. Ein Onlineshop prüft, wer ab 50 € Gratisversand bekommt. Excel entscheidet für alle gleichzeitig.`,
+k:`Wer die <b>Note 4 oder schlechter</b> hat (Zahl 4 oder höher), wird ausgefragt. Schreibe in <b>C2</b> eine WENN-Formel mit „ausfragen“ / „nicht ausfragen“ und ziehe sie bis <b>C6</b>.`,h:'=WENN(B2>=4;"ausfragen";"nicht ausfragen")',c:{A1:'Schüler',B1:'Note',C1:'Mündlich?',A2:'Anna',B2:5,A3:'Ben',B3:3,A4:'Clara',B4:4,A5:'David',B5:2,A6:'Elif',B6:1},nc:4,nr:6,s:'C2',tg:['C2','C6'],
+ck:()=>{if(!Q('C2'))return'';const x=[5,3,4,2,1].map((n,i)=>V('C'+(i+2))===(n>=4?'ausfragen':'nicht ausfragen'));return x.every(Boolean)||(x[0]?'C2 ✓ – jetzt das Quadrat bis C6 ziehen.':'C2 stimmt noch nicht. Prüfe >=, Anführungszeichen und Strichpunkte.')}},
+{m:3,t:'WENN mit Rechnung und $',e:`Statt eines Wortes darfst du im „Dann“-Teil direkt rechnen: <code>=WENN(B2&gt;35;B2*$F$1;"nein")</code>. Das <b>$</b> sperrt die Zelle F1: Beim Nach-unten-Ziehen würde sonst aus F1 immer F2, F3 … – mit <b>$F$1</b> bleibt sie fest.`,
+y:`Der Landkreis zahlt nur Vereinen mit mehr als 35 Mitgliedern 12 € pro Mitglied. Ändert sich der Betrag, tippst du ihn nur einmal in F1 um – alle Zuschüsse rechnen sich neu.`,
+k:`Schreibe in <b>C2</b>: <b>Wenn</b> Mitglieder mehr als 35, <b>dann</b> Mitglieder mal Zuschuss (F1), <b>sonst</b> „nein“. Ziehe bis <b>C6</b>.`,h:'=WENN(B2>35;B2*$F$1;"nein") – das $ kannst du auf der Tastenleiste antippen.',c:{A1:'Verein',B1:'Mitglieder',C1:'Zuschuss in €',E1:'€ pro Mitglied',F1:12,A2:'Basketball',B2:70,A3:'Fußball',B3:110,A4:'Tischtennis',B4:30,A5:'Schach',B5:36,A6:'Judo',B6:25},nc:6,nr:6,s:'C2',tg:['C2','C6'],
+ck:()=>{if(!Q('C2'))return'';const x=[840,1320,'nein',432,'nein'].map((v,i)=>V('C'+(i+2))===v);if(x.every(Boolean))return true;if(!x[0])return'C2 stimmt noch nicht (Basketball: 70 × 12 = 840).';return Q('C3')&&!/\$/.test(Q('C2'))?'Beim Ziehen wandert F1 mit nach unten! Setze Dollarzeichen: $F$1':'C2 ✓ – jetzt bis C6 ziehen.'}},
+{m:4,t:'MITTELWERT, MAX und MIN',e:`Drei weitere nützliche Funktionen: <code>=MITTELWERT(B2:B9)</code> (Durchschnitt), <code>=MAX(B2:B9)</code> (größter Wert) und <code>=MIN(B2:B9)</code> (kleinster Wert). Tippe <code>=M</code> und schau, was Excel vorschlägt!`,
+y:`Lehrkraft, Trainer, Wetterstation: Durchschnitt, Bestleistung und schwächstes Ergebnis braucht man ständig – bei 8 Zeilen im Kopf, bei 800 nur mit Excel.`,
+k:`Klassenarbeit (max. 20 Punkte): Berechne in <b>B11</b> den Durchschnitt, in <b>B12</b> die höchste und in <b>B13</b> die niedrigste Punktzahl.`,h:'=MITTELWERT(B2:B9) – =MAX(B2:B9) – =MIN(B2:B9)',c:{A1:'Schüler',B1:'Punkte',A2:'Anna',B2:12,A3:'Ben',B3:18,A4:'Clara',B4:9,A5:'David',B5:20,A6:'Elif',B6:15,A7:'Finn',B7:7,A8:'Gina',B8:17,A9:'Hasan',B9:14,A11:'Durchschnitt',A12:'Beste Punktzahl',A13:'Niedrigste Punktzahl'},nc:3,nr:13,tg:['B11','B12','B13'],
+ck:()=>{const t=[['B11',/^=MITTELWERT\(/,14],['B12',/^=MAX\(/,20],['B13',/^=MIN\(/,7]],bad=t.filter(([k,re,x])=>!(re.test(Q(k))&&eq(k,x)));return bad.length==0||(bad.length==3&&!Q('B11')&&!Q('B12')&&!Q('B13')?'':'Noch offen oder falsch: '+bad.map(x=>x[0]).join(', '))}}
+
+];
+/* Oberfläche */
+const FN={SUMME:['Addiert Zahlen',['Zahl1','[Zahl2]','…']],ANZAHL:['Zählt Zellen mit Zahlen',['Wert1','[Wert2]','…']],ANZAHL2:['Zählt alle gefüllten Zellen',['Wert1','[Wert2]','…']],ANZAHLLEEREZELLEN:['Zählt leere Zellen',['Bereich']],WENN:['Prüft eine Bedingung',['Wahrheitstest','Wert_wenn_wahr','Wert_wenn_falsch']],MITTELWERT:['Durchschnitt',['Zahl1','[Zahl2]','…']],MIN:['Kleinster Wert',['Zahl1','[Zahl2]','…']],MAX:['Größter Wert',['Zahl1','[Zahl2]','…']]};
+let pm,acL=[],acI=0;const fx=$('#fx'),wp=$('#wp');
+function load(){const s=S[si];cells={};fmt={};for(const k in s.c)cells[k]=''+s.c[k];const p=P(s.s||s.tg[0]);sel={a:p,b:p};drag=0;dirty=false;
+let h=`<table id="g" style="width:${36+150+105*(s.nc-1)}px"><tr><th style="width:36px"></th>`;for(let c=0;c<s.nc;c++)h+=`<th data-c="${c}" style="width:${c?105:150}px">${L(c)}</th>`;h+='</tr>';
+for(let r=1;r<=s.nr;r++){h+=`<tr><th data-r="${r}">${r}</th>`;for(let c=0;c<s.nc;c++)h+=`<td data-c="${c}" data-r="${r}"></td>`;h+='</tr>'}
+wp.innerHTML=h+'</table><div id="hd"></div>';
+$('#t').textContent=s.t;$('#e').innerHTML=s.e;$('#y').innerHTML=s.y;$('#k').innerHTML=s.k;off();setFx();paint();check()}
+const setFx=()=>{fx.value=Q(ref(...sel.a));dirty=false},off=()=>{$('#ac').style.display='none';$('#tip').style.display='none'};
+function paint(){const s=S[si],[c1,c2,r1,r2]=rect(),rf={};
+if(dirty&&fx.value[0]=='='){let n=0;fx.value.replace(/\$?([A-Z]+)\$?(\d+)(?::\$?([A-Z]+)\$?(\d+))?(?![\d(])/gi,(m,a,b,c,d)=>{const p=P(a.toUpperCase()+b),q=c?P(c.toUpperCase()+d):p;for(let x=Math.min(p[0],q[0]);x<=Math.max(p[0],q[0]);x++)for(let y=Math.min(p[1],q[1]);y<=Math.max(p[1],q[1]);y++)rf[ref(x,y)]=n%4;n++;return m})}
+document.querySelectorAll('#g td').forEach(td=>{const c=+td.dataset.c,r=+td.dataset.r,k=ref(c,r);let v;try{v=val(k)}catch(e){v='#NAME?'}let d=disp(v);if(fmt[k]&&typeof v=='number')d=v.toLocaleString('de-DE',{style:'currency',currency:'EUR'});if(td.textContent!==d)td.textContent=d;
+td.className=(typeof v=='number'?'n ':'')+(d[0]=='#'?'er ':'')+(s.tg.includes(k)?'tg ':'')+(c>=c1&&c<=c2&&r>=r1&&r<=r2?'sl ':'')+(c==sel.a[0]&&r==sel.a[1]?'ac ':'')+(drag=='f'&&r>r2&&r<=fillTo&&c>=c1&&c<=c2?'pv ':'')+(k in rf?'r'+rf[k]:'')});
+document.querySelectorAll('#g th[data-c]').forEach(h=>h.classList.toggle('on',+h.dataset.c>=c1&&+h.dataset.c<=c2));document.querySelectorAll('#g th[data-r]').forEach(h=>h.classList.toggle('on',+h.dataset.r>=r1&&+h.dataset.r<=r2));
+const t=document.querySelector(`#g td[data-c="${c2}"][data-r="${r2}"]`),a=t.getBoundingClientRect(),b=wp.getBoundingClientRect(),h=$('#hd');
+h.style.display='block';h.style.left=a.right-b.left+wp.scrollLeft-15+'px';h.style.top=a.bottom-b.top+wp.scrollTop-15+'px';$('#nb').textContent=(c1==c2&&r1==r2)?ref(c1,r1):ref(c1,r1)+':'+ref(c2,r2)}
+function check(){const s=S[si],f=$('#fb');let r;try{r=s.ck()}catch(e){r=''}
+if(r===true){done.add(si);f.className='fb ok';f.innerHTML='✅ Richtig! Gut gemacht. '+(si<S.length-1?'<button onclick="go(1)">Weiter →</button>':'🎉 Alle Aufgaben geschafft!')}
+else{f.className='fb'+(r?' wn':'');f.textContent=r||'Probiere es aus – du siehst sofort, ob es stimmt.'}tabs()}
+function tabs(){$('#mods').innerHTML=MODS.map((n,i)=>{const ids=S.map((s,j)=>s.m==i?j:-1).filter(j=>j>=0);return`<button class="${S[si].m==i?'cur':''}" onclick="si=${ids[0]};load()">${n}<small>${ids.filter(j=>done.has(j)).length} von ${ids.length} geschafft</small></button>`}).join('');
+const f=S.findIndex(x=>x.m==S[si].m),n=S.filter(x=>x.m==S[si].m).length;$('#cnt').textContent=`Aufgabe ${si-f+1} von ${n}`;
+$('#dots').innerHTML=S.map((s,j)=>s.m==S[si].m?`<button class="${j==si?'cur ':''}${done.has(j)?'dn':''}" onclick="si=${j};load()">${done.has(j)?'✓':j-f+1}</button>`:'').join('');
+$('#pgi').style.width=done.size/S.length*100+'%';$('#pgt').textContent=`${done.size} von ${S.length} Aufgaben geschafft`}
+const go=d=>{si=Math.max(0,Math.min(S.length-1,si+d));load();scrollTo(0,0)};
+function say(m){const f=$('#fb');f.className='fb wn';f.textContent=m}
+const hint=()=>say('💡 '+S[si].h);
+function commit(){if(!dirty)return;dirty=false;let v=fx.value.replace(/[“”„‟]/g,'"').replace(/[‘’‚]/g,"'").trim();if(v[0]=='=')v=v.replace(/("[^"]*")|([^"]+)/g,(m,s,o)=>s||o.toUpperCase());
+const k=ref(...sel.a);v===''?delete cells[k]:cells[k]=v;paint();check()}
+/* Funktionsvorschläge und Argument-Hilfe wie in Excel */
+function assist(){const v=fx.value,p=fx.selectionStart??v.length,pre=v.slice(0,p),m=v[0]=='='&&/(^|[=(;+\-*\/<>:])([A-ZÄÖÜ][A-ZÄÖÜ0-9]*)$/i.exec(pre);
+acL=m?Object.keys(FN).filter(n=>n.startsWith(m[2].toUpperCase())):[];if(acI>=acL.length)acI=0;
+$('#ac').innerHTML=acL.map((n,i)=>`<div class="ai${i==acI?' on':''}" data-n="${n}"><b>ƒx ${n}</b><span>${FN[n][0]}</span></div>`).join('');$('#ac').style.display=acL.length?'block':'none';
+const st=[];let q=0;for(let i=0;i<p;i++){const ch=v[i];if(ch=='"')q=!q;else if(!q){if(ch=='('){const w=/([A-ZÄÖÜ][A-ZÄÖÜ0-9]*)$/i.exec(v.slice(0,i));st.push([w?w[1].toUpperCase():'',0])}else if(ch==')')st.pop();else if(ch==';'&&st.length)st[st.length-1][1]++}}
+const t=st.reverse().find(x=>FN[x[0]]),tp=$('#tip');if(t&&v[0]=='='){const a=FN[t[0]][1];tp.innerHTML=`=${t[0]}(${a.map((x,i)=>i==Math.min(t[1],a.length-1)?`<u>${x}</u>`:x).join('; ')})`;tp.style.display='block'}else tp.style.display='none'}
+function pick(n){const p=fx.selectionStart,v=fx.value,pre=v.slice(0,p),m=/([A-ZÄÖÜ][A-ZÄÖÜ0-9]*)$/i.exec(pre),s=pre.slice(0,m.index)+n+'(';fx.value=s+v.slice(p);fx.focus();fx.setSelectionRange(s.length,s.length);dirty=true;paint();assist()}
+fx.addEventListener('input',()=>{dirty=true;acI=0;paint();assist()});['keyup','click','focus'].forEach(t=>fx.addEventListener(t,e=>{if(e.key!='Enter'&&!e.key?.startsWith('Arrow'))assist();else if(e.key?.startsWith('Arrow')&&!acL.length)assist()}));
+fx.addEventListener('blur',()=>{commit();off()});
+fx.addEventListener('keydown',e=>{const open=$('#ac').style.display=='block';
+if(open&&(e.key=='ArrowDown'||e.key=='ArrowUp')){e.preventDefault();acI=(acI+(e.key=='ArrowDown'?1:acL.length-1))%acL.length;assist();return}
+if(open&&(e.key=='Tab'||e.key=='Enter')){e.preventDefault();pick(acL[acI]);return}
+if(e.key=='Enter'){e.preventDefault();commit();if(sel.a[1]<S[si].nr){const p=[sel.a[0],sel.a[1]+1];sel={a:p,b:p};setFx();paint()}}
+if(e.key=='Escape'){setFx();paint();off()}});
+$('#ac').addEventListener('pointerdown',e=>{e.preventDefault();const d=e.target.closest('.ai');if(d)pick(d.dataset.n)});$('#ac').addEventListener('mousedown',e=>e.preventDefault());
+$('#bv').onclick=()=>{commit();off()};$('#bc').onclick=()=>{setFx();paint();off()};
+/* Menüband */
+$('#bs').onclick=()=>{commit();const[c,r]=sel.a;let t=r-1;while(t>=1&&typeof V(ref(c,t))=='number')t--;if(t==r-1)return say('Σ braucht Zahlen direkt über der Zelle. Tippe zuerst die Zelle unter den Zahlen an.');cells[ref(c,r)]=`=SUMME(${ref(c,t+1)}:${ref(c,r-1)})`;setFx();paint();check()};
+$('#be').onclick=()=>{commit();const[c1,c2,r1,r2]=rect(),ks=[];for(let c=c1;c<=c2;c++)for(let r=r1;r<=r2;r++)ks.push(ref(c,r));const all=ks.every(k=>fmt[k]);ks.forEach(k=>all?delete fmt[k]:fmt[k]=1);paint();check()};
+/* Tastenleiste */
+$('#kb').innerHTML='=+-*/():;"<>$,'.split('').map(c=>`<button>${c}</button>`).join('');
+$('#kb').addEventListener('mousedown',e=>e.preventDefault());
+$('#kb').addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;e.preventDefault();const p=fx.selectionStart??fx.value.length;fx.value=fx.value.slice(0,p)+b.textContent+fx.value.slice(fx.selectionEnd??p);fx.focus();fx.setSelectionRange(p+1,p+1);dirty=true;paint();assist()});
+/* Tabelle: markieren, Zellen in Formeln anklicken, Ausfüllkästchen ziehen */
+const pointOK=()=>dirty&&fx.value[0]=='='&&/[=+\-*\/(;:<>]$/.test(fx.value.slice(0,fx.selectionStart??fx.value.length));
+wp.addEventListener('mousedown',e=>e.preventDefault());
+wp.addEventListener('pointerdown',e=>{if(e.target.id=='hd'){commit();drag='f';fillTo=rect()[3];e.target.setPointerCapture(e.pointerId);e.preventDefault();return}
+const td=e.target.closest('td');if(!td)return;const c=+td.dataset.c,r=+td.dataset.r;
+if(pointOK()){const p=fx.selectionStart??fx.value.length,t=ref(c,r);fx.value=fx.value.slice(0,p)+t+fx.value.slice(fx.selectionEnd??p);pm={p,len:t.length,a:[c,r]};drag='p';dirty=true;paint();return}
+commit();const p=[c,r];sel={a:p,b:p};drag='s';setFx();paint()});
+wp.addEventListener('pointermove',e=>{if(!drag)return;const t=document.elementFromPoint(e.clientX,e.clientY),td=t&&t.closest&&t.closest('td');if(!td)return;const c=+td.dataset.c,r=+td.dataset.r;
+if(drag=='s')sel.b=[c,r];else if(drag=='f')fillTo=r;else{const a=pm.a,x=ref(Math.min(a[0],c),Math.min(a[1],r)),y=ref(Math.max(a[0],c),Math.max(a[1],r)),txt=x==y?x:x+':'+y,v=fx.value;fx.value=v.slice(0,pm.p)+txt+v.slice(pm.p+pm.len);pm.len=txt.length}paint()});
+const up=()=>{if(!drag)return;const d=drag;drag=0;if(d=='f'){fill(fillTo);setFx();paint();check()}else if(d=='p'){fx.focus();const e=pm.p+pm.len;fx.setSelectionRange(e,e);paint();assist()}else{setFx();const[c1,c2,r1,r2]=rect();paint();if(c1==c2&&r1==r2)fx.focus();else fx.blur()}};
+wp.addEventListener('pointerup',up);wp.addEventListener('pointercancel',up);
+load();
+</script></body></html>
